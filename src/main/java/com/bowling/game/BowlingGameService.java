@@ -28,4 +28,10 @@ public class BowlingGameService {
 		return rolls[curser] + rolls[curser + 1] == 10;
 	}
 
+	public void rollABowl(int... rolls) {
+		for (int pinsDown : rolls) {
+			rollingABowl_InBowlingGameTest(pinsDown);
+
+		}
+	}
 }
