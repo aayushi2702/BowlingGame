@@ -11,6 +11,9 @@ import com.bowling.game.BowlingGameService;
 public class BowlingGameServiceTests {
 
 	BowlingGameService bowlingGameService;
+	private static final int[] GUTTER_GAME = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	private static final int[] EACH_ROLL_PINS_DOWN_1 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+	private static final int[] SPARE_START_FOLLOWED_BY_3_REST_0 = { 5,5, 3,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0 };
 
 	@Before
 	public void setUp() {
@@ -29,13 +32,13 @@ public class BowlingGameServiceTests {
 
 	@Test
 	public void getARollerBowlScoringAGutterBowlTests() {
-		rollABowl(20, 0);
+		rollABowl(GUTTER_GAME);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(0));
 	}
 
 	@Test
 	public void getARollerBowlToScoreAGameOf_1Tests() {
-		rollABowl(20, 1);
+		rollABowl(EACH_ROLL_PINS_DOWN_1);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(20));
 	}
 
@@ -44,12 +47,12 @@ public class BowlingGameServiceTests {
 		bowlingGameService.rollingABowl_InBowlingGameTest(5);
 		bowlingGameService.rollingABowl_InBowlingGameTest(5);
 		bowlingGameService.rollingABowl_InBowlingGameTest(3);
-		rollABowl(17, 0);
+		rollABowl(SPARE_START_FOLLOWED_BY_3_REST_0);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(16));
 	}
 
-	private void rollABowl(int timesABowlRolls, int pinsDown) {
-		for (int i = 0; i < timesABowlRolls; i++) {
+	private void rollABowl(int...rolls) {
+		for (int pinsDown : rolls) {
 			bowlingGameService.rollingABowl_InBowlingGameTest(pinsDown);
 
 		}
