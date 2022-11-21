@@ -44,9 +44,6 @@ public class BowlingGameServiceTests {
 
 	@Test
 	public void getARollerBowlToScoreASpareFollowedBy3Tests() {
-		bowlingGameService.rollingABowl_InBowlingGameTest(5);
-		bowlingGameService.rollingABowl_InBowlingGameTest(5);
-		bowlingGameService.rollingABowl_InBowlingGameTest(3);
 		bowlingGameService.rollABowl(SPARE_START_FOLLOWED_BY_3_REST_0);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(16));
 	}
