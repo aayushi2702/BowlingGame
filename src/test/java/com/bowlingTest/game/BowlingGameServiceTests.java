@@ -29,21 +29,26 @@ public class BowlingGameServiceTests {
 
 	@Test
 	public void getARollerBowlScoringAGutterBowlTests() {
-		int timesABowlRolls = 20;
-		int pinsDown = 0;
-		rollABowl(timesABowlRolls, pinsDown);
+		rollABowl(20, 0);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(0));
 	}
 
 	@Test
 	public void getARollerBowlToScoreAGameOf_1Tests() {
-		int timesABowlRolls=20;
-		int pinsDown=1;
-		rollABowl(timesABowlRolls, pinsDown);
+		rollABowl(20, 1);
 		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(20));
 	}
 
-	private void rollABowl(int timesABowlRolls, int pinsDown ) {
+	@Test
+	public void getARollerBowlToScoreASpareFollowedBy3Tests() {
+		bowlingGameService.rollingABowl_InBowlingGameTest(5);
+		bowlingGameService.rollingABowl_InBowlingGameTest(5);
+		bowlingGameService.rollingABowl_InBowlingGameTest(3);
+		rollABowl(17, 0);
+		assertThat(bowlingGameService.getScoreAfterBowlHits(), is(16));
+	}
+
+	private void rollABowl(int timesABowlRolls, int pinsDown) {
 		for (int i = 0; i < timesABowlRolls; i++) {
 			bowlingGameService.rollingABowl_InBowlingGameTest(pinsDown);
 
